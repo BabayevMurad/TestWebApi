@@ -23,6 +23,17 @@ namespace TestWebApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("GetById/{id}")]
+        public ActionResult<Product> GetById(int id)
+        {
+            var product = _productService.GetProductById(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
+
         [HttpPost]
         public ActionResult<Product> Post([FromBody] Product product)
         {
@@ -39,6 +50,7 @@ namespace TestWebApi.Controllers
 
             return Ok(item);
         }
+
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

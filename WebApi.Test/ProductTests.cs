@@ -71,5 +71,14 @@ namespace WebApi.Tests
             Assert.That(createdProduct is not null);
             Assert.That(newProduct.Name, Is.EqualTo(createdProduct?.Name));
         }
+
+        [Test]
+        public async Task GetProductById_ReturnOkResponce()
+        {
+            var response = await _client.GetAsync("/api/products/GetById/1");
+            response.EnsureSuccessStatusCode();
+            var product = await response.Content.ReadFromJsonAsync<Product>();
+            Assert.That(product is not null);
+        }
     }
 }
